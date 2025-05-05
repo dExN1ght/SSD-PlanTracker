@@ -215,13 +215,17 @@ async def send_notification(user_id: int, message: str):
 
 
 async def check_upcoming_tasks():
-    """Check for tasks that are scheduled to start in 10 minutes and send notifications."""
+    """Check for tasks that are scheduled to start in 10 minutes and send
+    notifications."""
     while True:
         try:
             db = next(database.get_db())
             now = datetime.utcnow()
             ten_minutes_from_now = now + timedelta(minutes=10)
-            logger.info(f"[NOTIFY] Now: {now.isoformat()}, 10min from now: {ten_minutes_from_now.isoformat()}")
+            logger.info(
+                f"[NOTIFY] Now: {now.isoformat()}, "
+                f"10min from now: {ten_minutes_from_now.isoformat()}"
+            )
 
             # Find tasks scheduled to start in the next 10 minutes
             upcoming_tasks = (
@@ -230,17 +234,22 @@ async def check_upcoming_tasks():
                     models.Activity.scheduled_time >= now,
                     models.Activity.scheduled_time <= ten_minutes_from_now,
                     models.Activity.timer_status == "stopped",
-                    models.Activity.notified == False
+                    models.Activity.notified.is_(False)
                 )
                 .all()
             )
             logger.info(f"[NOTIFY] Found {len(upcoming_tasks)} upcoming tasks")
 
             for task in upcoming_tasks:
-                logger.info(f"[NOTIFY] Task id={task.id}, title='{task.title}', scheduled_time={task.scheduled_time}, timer_status={task.timer_status}")
+                logger.info(
+                    f"[NOTIFY] Task id={task.id}, title='{task.title}', "
+                    f"scheduled_time={task.scheduled_time}, "
+                    f"timer_status={task.timer_status}"
+                )
                 await send_notification(
                     task.user_id,
-                    f"🔔 Reminder: Task '{task.title}' is scheduled to start in 10 minutes!"
+                    f"🔔 Reminder: Task '{task.title}' is scheduled "
+                    f"to start in 10 minutes!"
                 )
                 task.notified = True  # Mark that we've sent the notification
                 db.commit()
