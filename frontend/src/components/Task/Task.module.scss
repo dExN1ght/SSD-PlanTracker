@@ -1,0 +1,149 @@
+.task {
+  display: flex;
+  align-items: flex-start;
+  background-color: var(--element-primary);
+  border-radius: 6px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  box-shadow: var(--shadow-small);
+  transition: all 0.2s ease;
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: var(--shadow-medium);
+    background-color: var(--element-hover);
+  }
+
+  &.completed {
+    opacity: 0.6;
+
+    .title {
+      text-decoration: line-through;
+      color: var(--text-muted);
+    }
+  }
+
+  &.selected {
+    border: 2px solid var(--accent-primary);
+    background-color: var(--element-hover);
+  }
+}
+
+.checkbox {
+  margin-right: 12px;
+  padding-top: 2px;
+
+  input {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    accent-color: var(--accent-primary);
+  }
+}
+
+.content {
+  flex-grow: 1;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3px;
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.timerStatus {
+  font-size: 10px;
+  padding: 1px 3px;
+  border-radius: 3px;
+  
+  &.running {
+    color: var(--color-success, #38a169);
+  }
+  
+  &.paused {
+    color: var(--color-warning, #dd6b20);
+  }
+}
+
+.recordedTime {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent-primary);
+  font-family: monospace;
+}
+
+.details {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-top: 3px;
+}
+
+.dueDate {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+}
+
+.tag {
+  font-size: 11px;
+  padding: 1px 6px;
+  border-radius: 10px;
+  background-color: var(--element-secondary);
+  color: var(--text-secondary);
+}
+
+.priority {
+  padding: 3px 6px;
+  border-radius: 3px;
+  font-size: 11px;
+  margin-right: 12px;
+  text-transform: capitalize;
+
+  &.low {
+    background-color: var(--priority-low-bg);
+    color: var(--priority-low);
+  }
+
+  &.medium {
+    background-color: var(--priority-medium-bg);
+    color: var(--priority-medium);
+  }
+
+  &.high {
+    background-color: var(--priority-high-bg);
+    color: var(--priority-high);
+  }
+}
+
+.deleteBtn {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 14px;
+  padding: 3px 6px;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+  
+  &:hover {
+    opacity: 1;
+    color: var(--color-danger);
+  }
+}

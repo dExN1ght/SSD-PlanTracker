@@ -1,0 +1,153 @@
+.todoWrapper {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.errorMessage {
+  background-color: var(--color-danger-bg);
+  color: var(--color-danger);
+  padding: 8px 12px;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  
+  &::before {
+    content: '⚠️';
+  }
+}
+
+.content {
+  background-color: var(--element-primary);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: var(--shadow-medium);
+}
+
+.loading {
+  padding: 20px 0;
+  text-align: center;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+// Filters - now more compact and horizontal
+.filters {
+  background-color: var(--element-secondary);
+  border-radius: 8px;
+  padding: 12px;
+  box-shadow: var(--shadow-small);
+  margin-bottom: 16px;
+  border: 1px solid var(--border-color);
+}
+
+.filterRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+}
+
+.filterSection {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.filterLabel {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+// Tag filtering
+.tagsList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.tagButton {
+  background-color: var(--element-secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  
+  &:hover {
+    background-color: var(--element-hover);
+  }
+  
+  &.active {
+    background-color: var(--accent-primary);
+    color: white;
+    border-color: var(--accent-primary);
+  }
+}
+
+.tagsSkeleton {
+  color: var(--text-secondary);
+  font-style: italic;
+  font-size: 12px;
+}
+
+// Date filtering
+.dateFilter {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.dateInput {
+  padding: 4px 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-size: 12px;
+  background-color: var(--element-secondary);
+  color: var(--text-primary);
+  
+  &:focus {
+    border-color: var(--accent-primary);
+    outline: none;
+  }
+}
+
+.clearButton {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
+  
+  &:hover {
+    color: var(--color-danger);
+  }
+}
+
+.resetButton {
+  background-color: var(--element-secondary);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-left: auto;
+  
+  &:hover {
+    background-color: var(--color-danger-bg);
+    color: var(--color-danger);
+  }
+} 

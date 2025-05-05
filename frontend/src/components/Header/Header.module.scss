@@ -1,0 +1,93 @@
+.header {
+  background-color: var(--element-primary);
+  border-bottom: 1px solid var(--border-color);
+  padding: 0.75rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: var(--shadow-small);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  cursor: pointer;
+  
+  h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.5px;
+    
+    span {
+      color: var(--accent-primary);
+    }
+  }
+}
+
+.nav {
+  ul {
+    display: flex;
+    list-style-type: none;
+    gap: 1.5rem;
+    
+    li {
+      a {
+        text-decoration: none;
+        color: var(--text-secondary);
+        font-weight: 500;
+        font-size: 0.95rem;
+        padding: 0.5rem 0;
+        position: relative;
+        transition: color 0.2s ease;
+        
+        &:hover {
+          color: var(--text-primary);
+        }
+        
+        &.active {
+          color: var(--accent-primary);
+          
+          &::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--accent-primary);
+          }
+        }
+      }
+    }
+  }
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.userEmail {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-right: 0.5rem;
+}
+
+@media (max-width: 600px) {
+  .nav {
+    display: none;
+  }
+  
+  .userEmail {
+    display: none;
+  }
+} 
