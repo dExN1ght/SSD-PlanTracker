@@ -72,7 +72,7 @@ jobs:
       - name: Run linting
         run: npm run lint
 
-  trivy-backend:
+  trivy-backend-image:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -80,17 +80,18 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Run Trivy vulnerability scanner (backend)
+      - name: Build Docker image (backend)
+        run: docker build -t backend-image:latest .
+      - name: Scan Docker image with Trivy (backend)
         uses: aquasecurity/trivy-action@master
         with:
-          scan-type: 'fs'
-          scan-ref: '.'
+          image-ref: 'backend-image:latest'
           format: 'table'
           exit-code: '1'
           ignore-unfixed: true
           severity: 'CRITICAL,HIGH'
 
-  trivy-frontend:
+  trivy-frontend-image:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -98,17 +99,18 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Run Trivy vulnerability scanner (frontend)
+      - name: Build Docker image (frontend)
+        run: docker build -t frontend-image:latest .
+      - name: Scan Docker image with Trivy (frontend)
         uses: aquasecurity/trivy-action@master
         with:
-          scan-type: 'fs'
-          scan-ref: '.'
+          image-ref: 'frontend-image:latest'
           format: 'table'
           exit-code: '1'
           ignore-unfixed: true
           severity: 'CRITICAL,HIGH'
 
-  anchore-backend:
+  anchore-backend-image:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -116,14 +118,16 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Run Anchore scan (backend)
+      - name: Build Docker image (backend)
+        run: docker build -t backend-image:latest .
+      - name: Scan Docker image with Anchore (backend)
         uses: anchore/scan-action@v3
         with:
-          path: .
+          image: backend-image:latest
           fail-build: true
           severity-cutoff: high
 
-  anchore-frontend:
+  anchore-frontend-image:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -131,9 +135,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Run Anchore scan (frontend)
+      - name: Build Docker image (frontend)
+        run: docker build -t frontend-image:latest .
+      - name: Scan Docker image with Anchore (frontend)
         uses: anchore/scan-action@v3
         with:
-          path: .
+          image: frontend-image:latest
           fail-build: true
           severity-cutoff: high
