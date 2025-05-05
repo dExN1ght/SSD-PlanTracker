@@ -107,3 +107,33 @@ jobs:
           exit-code: '1'
           ignore-unfixed: true
           severity: 'CRITICAL,HIGH'
+
+  anchore-backend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./backend
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Run Anchore scan (backend)
+        uses: anchore/scan-action@v3
+        with:
+          path: .
+          fail-build: true
+          severity-cutoff: high
+
+  anchore-frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./frontend
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Run Anchore scan (frontend)
+        uses: anchore/scan-action@v3
+        with:
+          path: .
+          fail-build: true
+          severity-cutoff: high
