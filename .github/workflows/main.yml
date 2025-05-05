@@ -32,7 +32,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install poetry
           poetry config virtualenvs.create false
-          poetry install
+          poetry install --no-root
 
       - name: Run linting
         run: |
@@ -126,6 +126,12 @@ jobs:
           image: backend-image:latest
           fail-build: true
           severity-cutoff: high
+          output-format: sarif
+          output-file: anchore.sarif
+      - name: Upload Anchore scan results to GitHub Security tab (backend)
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: anchore.sarif
 
   anchore-frontend-image:
     runs-on: ubuntu-latest
@@ -143,3 +149,9 @@ jobs:
           image: frontend-image:latest
           fail-build: true
           severity-cutoff: high
+          output-format: sarif
+          output-file: anchore.sarif
+      - name: Upload Anchore scan results to GitHub Security tab (frontend)
+        uses: github/codeql-action/upload-sarif@v2
+        with:
+          sarif_file: anchore.sarif
